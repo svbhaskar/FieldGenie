@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "536516092787",
+    "project_id": "fieldgenie-fbde5",
+    "storage_bucket": "fieldgenie-fbde5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536516092787:android:37230aff540f0b36d25b06",
+        "android_client_info": {
+          "package_name": "com.example.fieldgenie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "536516092787-cqjp6l996ahur55dt5otk226ek3otrl1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5MRdOTmTGcqwGvePfw-Lyw4VCXerYCUI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "536516092787-cqjp6l996ahur55dt5otk226ek3otrl1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

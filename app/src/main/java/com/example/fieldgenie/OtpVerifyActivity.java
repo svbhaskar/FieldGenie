@@ -30,14 +30,12 @@ public class OtpVerifyActivity extends AppCompatActivity {
 
     Button verifyButton;
 
-    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_verification);
 
-        progressBar = findViewById(R.id.progressBar);
 
         verificationId = getIntent().getStringExtra("verificationId");
 
@@ -56,7 +54,7 @@ public class OtpVerifyActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                progressBar.setVisibility(View.VISIBLE);
+
                 verifyButton.setVisibility(View.INVISIBLE);
 
                 if(inputCode1.getText().toString().trim().isEmpty() ||
@@ -82,13 +80,13 @@ public class OtpVerifyActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
-                                    progressBar.setVisibility(View.VISIBLE);
+
                                     verifyButton.setVisibility(View.INVISIBLE);
                                     Intent intent = new Intent(OtpVerifyActivity.this, MainActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                 }else{
-                                    progressBar.setVisibility(View.GONE);
+
                                     verifyButton.setVisibility(View.VISIBLE);
                                     Toast.makeText(OtpVerifyActivity.this, "Invalid OTP", Toast.LENGTH_SHORT).show();
                                 }

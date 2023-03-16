@@ -8,9 +8,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -24,8 +30,11 @@ public class OtpSendActivity extends AppCompatActivity {
     EditText inputMobile;
     Button sendOtp;
 
-    ProgressBar progressBar;
+    SignInButton signInButton;
 
+    GoogleSignInOptions gso;
+
+    GoogleSignInClient gsc;
     FirebaseAuth mAuth;
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     @Override
@@ -33,11 +42,23 @@ public class OtpSendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_send);
 
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+
+        gsc = GoogleSignIn.getClient(this, gso);
+
+        signInButton = findViewById(R.id.sign_in_button);
+
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signInGoogle();
+            }
+        });
+
         mAuth = FirebaseAuth.getInstance();
 
         inputMobile = findViewById(R.id.phoneNumber);
         sendOtp = findViewById(R.id.sendOtp);
-        progressBar = findViewById(R.id.progressBar);
 
         sendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,9 +74,34 @@ public class OtpSendActivity extends AppCompatActivity {
         });
     }
 
+    private void signInGoogle() {
+        Intent signInIntent = gsc.getSignInIntent();
+        startActivityForResult(signInIntent, 1000);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == 1000){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try{
+                task.getResult(ApiException.class);
+                navigateToMainActivity();
+            } catch (ApiException e){
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void navigateToMainActivity() {
+        finish();
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+    }
+
     private void otpSend() {
 
-        progressBar.setVisibility(View.VISIBLE);
+
         sendOtp.setVisibility(View.INVISIBLE);
         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
@@ -66,7 +112,7 @@ public class OtpSendActivity extends AppCompatActivity {
 
             @Override
             public void onVerificationFailed(@NonNull FirebaseException e) {
-                progressBar.setVisibility(View.GONE);
+
                 sendOtp.setVisibility(View.VISIBLE);
                 Toast.makeText(OtpSendActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -74,7 +120,7 @@ public class OtpSendActivity extends AppCompatActivity {
             @Override
             public void onCodeSent(@NonNull String verificationId,
                                    @NonNull PhoneAuthProvider.ForceResendingToken token) {
-                progressBar.setVisibility(View.GONE);
+
                 sendOtp.setVisibility(View.VISIBLE);
                 Intent intent = new Intent(OtpSendActivity.this, OtpVerifyActivity.class);
                 intent.putExtra("phoneNumber", inputMobile.getText().toString().trim());

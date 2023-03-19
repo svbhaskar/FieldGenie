@@ -24,6 +24,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 public class OtpVerifyActivity extends AppCompatActivity {
 
     EditText inputCode1, inputCode2, inputCode3, inputCode4, inputCode5, inputCode6;
+
     TextView textMobile, resendButton;
 
     String verificationId;
@@ -86,7 +87,6 @@ public class OtpVerifyActivity extends AppCompatActivity {
                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                 }else{
-
                                     verifyButton.setVisibility(View.VISIBLE);
                                     Toast.makeText(OtpVerifyActivity.this, "Invalid OTP", Toast.LENGTH_SHORT).show();
                                 }
@@ -106,7 +106,7 @@ public class OtpVerifyActivity extends AppCompatActivity {
 
         textMobile = findViewById(R.id.textMobile);
         textMobile.setText(String.format(
-                "+91-%s", getIntent().getStringExtra("mobile")
+                "+91-%s", getIntent().getStringExtra("phoneNumber")
         ));
 
         setOtpInputs();

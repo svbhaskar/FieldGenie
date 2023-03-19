@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".OtpVerifyActivity">
+    tools:context=".OtpVerifyActivity"
+    android:background="@color/background">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -22,13 +23,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:text="OTP Verification"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         android:textSize="25sp"
         android:textStyle="bold" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         android:text="A 6-digit verification code has been resent to"
         android:layout_marginTop="15dp"
         android:layout_marginStart="30dp"
@@ -57,7 +58,7 @@
             android:importantForAutofill="no"
             android:inputType="number"
             android:maxLength="1"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="24sp"
             android:textStyle="bold"
             tools:ignore="LabelFor"/>
@@ -71,7 +72,7 @@
             android:importantForAutofill="no"
             android:inputType="number"
             android:maxLength="1"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="24sp"
             android:textStyle="bold"
             tools:ignore="LabelFor"/>
@@ -85,7 +86,7 @@
             android:importantForAutofill="no"
             android:inputType="number"
             android:maxLength="1"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="24sp"
             android:textStyle="bold"
             tools:ignore="LabelFor"/>
@@ -99,7 +100,7 @@
             android:importantForAutofill="no"
             android:inputType="number"
             android:maxLength="1"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="24sp"
             android:textStyle="bold"
             tools:ignore="LabelFor"/>
@@ -113,7 +114,7 @@
             android:importantForAutofill="no"
             android:inputType="number"
             android:maxLength="1"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="24sp"
             android:textStyle="bold"
             tools:ignore="LabelFor"/>
@@ -127,7 +128,7 @@
             android:importantForAutofill="no"
             android:inputType="number"
             android:maxLength="1"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="24sp"
             android:textStyle="bold"
             tools:ignore="LabelFor"/>
@@ -145,7 +146,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Didn't receive the OTP?"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textStyle="bold" />
 
         <TextView
@@ -153,6 +154,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:textColor="@color/textColor"
             android:text="RESEND OTP"/>
     </LinearLayout>
 
@@ -160,6 +162,7 @@
         android:id="@+id/verifyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/textColor"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:textAllCaps="false"

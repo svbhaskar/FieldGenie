@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".OtpSendActivity">
+    android:background="@color/background"
+    tools:context=".LoginActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -23,7 +24,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="50dp"
         android:text="Sign In"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         android:textSize="25sp"
         android:textStyle="bold" />
 
@@ -46,6 +47,7 @@
         android:background="@drawable/round_button"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
+        android:textColor="@color/textColor"
         android:text="Send OTP"
         android:textAllCaps="false"
         android:textSize="15sp"
@@ -57,6 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
+        android:textColor="@color/textColor"
         android:text="Or, sign in with..."
         android:layout_marginBottom="20dp"
         />

@@ -35,9 +35,6 @@ public class LoginActivity extends AppCompatActivity {
 
     SignInButton signInButton;
 
-    GoogleSignInOptions gso;
-
-    GoogleSignInClient gsc;
     FirebaseAuth mAuth;
 
     GoogleSignInOptions googleSignInOptions;
@@ -58,31 +55,23 @@ public class LoginActivity extends AppCompatActivity {
 
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
-                        .build();
+                .build();
 
         googleSignInClient = GoogleSignIn.getClient(getApplicationContext(), googleSignInOptions);
 
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                googleSignIn();
-            }
-        });
-        
+        signInButton.setOnClickListener(view -> googleSignIn());
+
 
         inputMobile = findViewById(R.id.phoneNumber);
         sendOtp = findViewById(R.id.sendOtp);
 
-        sendOtp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(inputMobile.getText().toString().trim().isEmpty()){
-                    Toast.makeText(LoginActivity.this, "Please Enter Phone Number", Toast.LENGTH_SHORT).show();
-                } else if(inputMobile.getText().toString().trim().length() != 10){
-                    Toast.makeText(LoginActivity.this, "Invalid Number", Toast.LENGTH_SHORT).show();
-                }else{
-                    otpSend();
-                }
+        sendOtp.setOnClickListener(view -> {
+            if(inputMobile.getText().toString().trim().isEmpty()){
+                Toast.makeText(LoginActivity.this, "Please Enter Phone Number", Toast.LENGTH_SHORT).show();
+            } else if(inputMobile.getText().toString().trim().length() != 10){
+                Toast.makeText(LoginActivity.this, "Invalid Number", Toast.LENGTH_SHORT).show();
+            }else{
+                otpSend();
             }
         });
     }

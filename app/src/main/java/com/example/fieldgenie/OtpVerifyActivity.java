@@ -54,9 +54,6 @@ public class OtpVerifyActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
 
-    int REQ_USER_CONSENT = 200;
-
-    SmsBroadcast smsBroadcast;
 
 
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
@@ -169,66 +166,11 @@ public class OtpVerifyActivity extends AppCompatActivity {
                 PhoneAuthProvider.verifyPhoneNumber(options);
             }
         });
+
         
-        startSmartUserConsent();
-        
     }
 
-    private void startSmartUserConsent() {
-        SmsRetrieverClient client = SmsRetriever.getClient(this);
-        client.startSmsUserConsent(null);
-    }
 
-    private void registerBroadcastReceiver(){
-        smsBroadcast = new SmsBroadcast();
-
-        smsBroadcast.smsBroadcastListener = new SmsBroadcast.SmsBroadcastListener() {
-            @Override
-            public void onSuccess(Intent intent) {
-                startActivityForResult(intent, REQ_USER_CONSENT);
-            }
-
-            @Override
-            public void onFailure() {
-
-            }
-        };
-
-        IntentFilter intentFilter = new IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION);
-        registerReceiver(smsBroadcast, intentFilter);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        registerBroadcastReceiver();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        unregisterReceiver(smsBroadcast);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == REQ_USER_CONSENT){
-            if((requestCode == RESULT_OK) && (data != null)){
-                String message = data.getStringExtra(SmsRetriever.EXTRA_SMS_MESSAGE);
-                getOtpFromMessage(message);
-            }
-        }
-    }
-
-    private void getOtpFromMessage(String message) {
-        Pattern otpPattern = Pattern.compile("(|^)\\d{6}");
-        Matcher matcher = otpPattern.matcher(message);
-        if(matcher.find()){
-            inputCode1.setText(matcher.group(0));
-        }
-    }
 
     private void startCountDownTimer(){
         resendEnabled = false;

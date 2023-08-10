@@ -155,7 +155,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:textColor="@color/textColor"
-            android:text="RESEND OTP"/>
+            android:textStyle="bold"
+            />
     </LinearLayout>
 
     <Button
